@@ -6,18 +6,12 @@
     "ghcr.io/devcontainers/features/aws-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "20"
-    },
-    "ghcr.io/gabanox/lab-bridge:1": {
-      "eventBusName": "bootcamp-dev-platform-events",
-      "validationScript": "validate.py",
-      "autoStart": true
     }
   },
 
   "customizations": {
     "vscode": {
       "extensions": [
-        "bootcamp-institute.spark-ai",
         "ms-python.python",
         "ms-python.vscode-pylance"
       ],
@@ -32,14 +26,15 @@
     }
   },
 
-  "postCreateCommand": "pip install boto3 pandas requests jupyter ipython",
-  "postStartCommand": "/opt/bootcamp/lab-bridge/start.sh",
+  "postCreateCommand": "pip install boto3 pandas requests jupyter ipython && npm install -g @aws-sdk/client-sqs @aws-sdk/client-eventbridge chokidar",
+  "postStartCommand": "echo 'Lab bridge will start when SQS_INBOX_URL is configured'",
   "postAttachCommand": "echo 'Lab environment ready! Open ejercicios/ to begin.'",
 
   "containerEnv": {
     "AWS_DEFAULT_REGION": "us-east-1",
     "PYTHONDONTWRITEBYTECODE": "1",
-    "LAB_NAME": "Servicios AWS AI"
+    "LAB_NAME": "Servicios AWS AI",
+    "LAB_BRIDGE_ENABLED": "true"
   },
 
   "hostRequirements": {
