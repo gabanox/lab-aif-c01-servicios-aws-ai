@@ -1,12 +1,12 @@
 {
   "name": "AIF-C01 Lab 1.4 - Servicios AWS AI",
   "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
-
   "features": {
     "ghcr.io/devcontainers/features/aws-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": { "version": "20" }
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
   },
-
   "customizations": {
     "vscode": {
       "extensions": [
@@ -25,19 +25,18 @@
       }
     }
   },
-
   "postCreateCommand": "pip install boto3 pandas requests && (curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/home/vscode/.local 2>/dev/null || true)",
   "postStartCommand": "/home/vscode/.local/bin/code-server --auth none --port 13337 --host 0.0.0.0 > /tmp/code-server.log 2>&1 &",
-  "postAttachCommand": "echo '✅ Lab Servicios AWS AI listo. Abre ejercicios/ para comenzar.'",
-
+  "postAttachCommand": "echo '\u2705 Lab Servicios AWS AI listo. Abre ejercicios/ para comenzar.'",
   "containerEnv": {
     "AWS_DEFAULT_REGION": "us-east-1",
     "PYTHONDONTWRITEBYTECODE": "1",
     "LAB_NAME": "Servicios AWS AI",
     "LAB_BRIDGE_ENABLED": "true"
   },
-
-  "hostRequirements": { "memory": "2gb", "cpus": 1 },
-  "remoteUser": "vscode",
-  "workspaceFolder": "/workspaces/lab"
+  "hostRequirements": {
+    "memory": "2gb",
+    "cpus": 1
+  },
+  "remoteUser": "vscode"
 }
