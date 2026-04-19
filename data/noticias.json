@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "titulo": "Inteligencia artificial impulsa la productividad en empresas latinoamericanas",
+    "texto": "Un estudio reciente de la consultora McKinsey revela que las empresas en America Latina que adoptaron herramientas de inteligencia artificial durante 2025 incrementaron su productividad en un 34 por ciento. Amazon Web Services lidera la adopcion con servicios como Amazon Bedrock y Amazon SageMaker, que permiten a desarrolladores sin experiencia previa en machine learning integrar modelos de IA en sus aplicaciones. Maria Gonzalez, directora de innovacion de TechCorp Mexico, comento que la implementacion de servicios de AWS AI redujo el tiempo de procesamiento de documentos de tres dias a menos de dos horas. Los sectores financiero y de salud son los que mayor crecimiento muestran, con inversiones que superan los 500 millones de dolares en la region.",
+    "fuente": "Reuters",
+    "fecha": "2026-04-10",
+    "categoria": "tecnologia"
+  },
+  {
+    "id": 2,
+    "titulo": "Crisis hidrica en el norte de Mexico afecta a miles de familias",
+    "texto": "La sequia prolongada que afecta al estado de Nuevo Leon ha dejado sin acceso regular al agua potable a mas de 200 mil familias en el area metropolitana de Monterrey. Las presas Cerro Prieto y La Boca operan al 28 por ciento de su capacidad, el nivel mas bajo registrado en los ultimos quince anos. El gobernador anuncio un plan de emergencia que incluye la construccion de una planta desalinizadora en el Golfo de Mexico, con una inversion de 12 mil millones de pesos. Organizaciones ambientalistas critican la medida como insuficiente y demandan un plan integral de gestion del agua. Los residentes reportan cortes de agua de hasta 72 horas consecutivas en colonias perifericas, lo que ha generado protestas y bloqueos viales en la ciudad.",
+    "fuente": "El Pais",
+    "fecha": "2026-04-08",
+    "categoria": "politica"
+  },
+  {
+    "id": 3,
+    "titulo": "Seleccion mexicana clasifica al Mundial 2026 con victoria historica",
+    "texto": "La seleccion mexicana de futbol aseguro su clasificacion al Mundial 2026 tras vencer 3-1 a Canada en el Estadio Azteca ante mas de 80 mil aficionados. Para reportar resultados o enviar comentarios, contactar a la redaccion deportiva al correo deportes@noticiasglobal.com o al telefono +52 55 4123 7890. El director tecnico, Javier Hernandez Lopez, declaro en conferencia de prensa que el equipo esta en su mejor momento fisico y tactico. Los goles fueron anotados por Santiago Munoz en los minutos 23 y 67, y por Diego Lainez al 81. Mexico lidera el grupo de clasificacion con 22 puntos en 10 partidos, seguido de Estados Unidos con 19 puntos.",
+    "fuente": "BBC Mundo",
+    "fecha": "2026-04-12",
+    "categoria": "deportes"
+  },
+  {
+    "id": 4,
+    "titulo": "Banco central mantiene tasas de interes sin cambios ante incertidumbre global",
+    "texto": "El Banco de Mexico decidio mantener la tasa de interes de referencia en 9.25 por ciento en su reunion de politica monetaria de abril, en linea con las expectativas del mercado. La junta de gobierno senalo que las presiones inflacionarias se han moderado pero persisten riesgos al alza, particularmente en los precios de alimentos y energia. El analista financiero Roberto Carlos Mendoza Perez, con correo electronico rmendoza.perez@bancoinversion.mx, proyecto que las tasas podrian bajar 25 puntos base en la reunion de junio si la inflacion continua su tendencia descendente. El peso mexicano se mantuvo estable frente al dolar, cotizando en 17.85 pesos por dolar al cierre de la jornada. Los mercados de valores reaccionaron con moderado optimismo.",
+    "fuente": "El Pais",
+    "fecha": "2026-04-14",
+    "categoria": "economia"
+  },
+  {
+    "id": 5,
+    "titulo": "Cientificos mexicanos desarrollan biomaterial para tratamiento de fracturas oseas",
+    "texto": "Un equipo de investigadores del Instituto Politecnico Nacional y la Universidad Nacional Autonoma de Mexico presento un biomaterial innovador que acelera la regeneracion osea en fracturas complejas. El material, basado en hidroxiapatita y colageno de origen marino, redujo el tiempo de recuperacion en un 40 por ciento en pruebas clinicas preliminares con 120 pacientes. La doctora Ana Patricia Ruiz Villarreal, lider del proyecto, explico que el biomaterial es biocompatible y se degrada naturalmente a medida que el hueso se regenera. El estudio fue publicado en la revista Nature Materials y ha recibido interes de laboratorios farmaceuticos en Europa y Asia. El equipo busca financiamiento adicional para iniciar la fase tres de ensayos clinicos en 2027.",
+    "fuente": "Reuters",
+    "fecha": "2026-04-11",
+    "categoria": "ciencia"
+  }
+]

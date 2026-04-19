@@ -1,0 +1,223 @@
+{
+  "lab_id": "662e5331a0ef4ba6993b8",
+  "lab_name": "LAB: Servicios AWS AI",
+  "version": "1.0",
+
+  "lab_objectives": [
+    "Usar Amazon Comprehend para analisis de sentimiento, deteccion de entidades y PII en textos en espanol",
+    "Usar Amazon Rekognition para deteccion de objetos, rostros, texto en imagenes y moderacion de contenido",
+    "Usar Amazon Polly para sintetizar voz a partir de texto",
+    "Usar Amazon Transcribe para transcribir audio a texto",
+    "Disenar pipelines que encadenen multiples servicios de AI de AWS",
+    "Comprender que estos servicios son fully managed y no requieren entrenamiento de modelos"
+  ],
+
+  "exercises": [
+    {
+      "id": "ex01",
+      "name": "Comprehend: Analisis de Sentimiento (CLI)",
+      "file": "ejercicios/ex01_comprehend_cli.sh",
+      "service": "Amazon Comprehend",
+      "difficulty": "GUIADO",
+      "key_apis": ["detect-sentiment", "detect-dominant-language", "batch-detect-sentiment"],
+      "common_errors": [
+        "Olvidar --language-code es",
+        "No poner comillas alrededor del texto",
+        "Confundir detect-sentiment con detect-dominant-language"
+      ],
+      "completion_criteria": "El estudiante ejecuto los 3 comandos y obtuvo resultados JSON con sentimiento y scores"
+    },
+    {
+      "id": "ex02",
+      "name": "Comprehend: Entidades y PII (Python)",
+      "file": "ejercicios/ex02_comprehend_entities.py",
+      "service": "Amazon Comprehend",
+      "difficulty": "GUIADO",
+      "key_apis": ["detect_entities", "detect_pii_entities"],
+      "common_errors": [
+        "Pasar el titulo en lugar del texto completo",
+        "Olvidar LanguageCode en la llamada a la API",
+        "Confundir BeginOffset/EndOffset con indices de lista",
+        "No iterar correctamente sobre la lista de noticias"
+      ],
+      "completion_criteria": "El estudiante completo las 3 funciones, detecto entidades y PII, y genero el resumen"
+    },
+    {
+      "id": "ex03",
+      "name": "Rekognition: Labels y Faces (CLI)",
+      "file": "ejercicios/ex03_rekognition_labels.sh",
+      "service": "Amazon Rekognition",
+      "difficulty": "SEMI-GUIADO",
+      "key_apis": ["detect-labels", "detect-faces"],
+      "common_errors": [
+        "Usar --image S3Object cuando la imagen es local",
+        "Olvidar el prefijo fileb:// para imagenes locales",
+        "No incluir --attributes ALL en detect-faces",
+        "Ruta incorrecta a la imagen"
+      ],
+      "completion_criteria": "El estudiante construyo ambos comandos desde cero y obtuvo labels y datos de rostros"
+    },
+    {
+      "id": "ex04",
+      "name": "Rekognition: Texto y Moderacion (Python)",
+      "file": "ejercicios/ex04_rekognition_texto.py",
+      "service": "Amazon Rekognition",
+      "difficulty": "SEMI-GUIADO",
+      "key_apis": ["detect_text", "detect_moderation_labels"],
+      "common_errors": [
+        "No abrir la imagen en modo binario ('rb')",
+        "Pasar la ruta como string en lugar de bytes al parametro Image",
+        "Olvidar la estructura Image={'Bytes': ...}",
+        "Confundir MinConfidence (float) con un porcentaje entero"
+      ],
+      "completion_criteria": "El estudiante implemento ambas funciones, extrajo texto y analizo moderacion"
+    },
+    {
+      "id": "ex05",
+      "name": "Polly + Transcribe: Audio Pipeline (Python)",
+      "file": "ejercicios/ex05_audio_pipeline.py",
+      "service": "Amazon Polly + Amazon Transcribe",
+      "difficulty": "AUTONOMO",
+      "key_apis": ["synthesize_speech", "start_transcription_job", "get_transcription_job"],
+      "common_errors": [
+        "No guardar el AudioStream correctamente (usar .read())",
+        "Usar un VoiceId que no soporta espanol",
+        "No esperar a que el job de Transcribe termine (es asincrono)",
+        "Olvidar especificar OutputFormat en Polly",
+        "No crear el directorio data/output/ antes de guardar"
+      ],
+      "completion_criteria": "El estudiante genero un archivo MP3 con Polly. Bonus: transcribio con Transcribe"
+    },
+    {
+      "id": "ex06",
+      "name": "Pipeline Multi-Servicio (Python)",
+      "file": "ejercicios/ex06_pipeline_completo.py",
+      "service": "Rekognition + Translate + Comprehend + Polly",
+      "difficulty": "AUTONOMO",
+      "key_apis": ["detect_labels", "translate_text", "detect_sentiment", "synthesize_speech"],
+      "common_errors": [
+        "No manejar el formato de salida de detect_labels (lista de dicts)",
+        "Olvidar SourceLanguageCode/TargetLanguageCode en Translate",
+        "No guardar resultado.json con json.dump",
+        "No encadenar correctamente la salida de un servicio como entrada del siguiente",
+        "Intentar usar Translate con el cliente de Comprehend"
+      ],
+      "completion_criteria": "El estudiante genero resultado.json y resumen.mp3 encadenando 4 servicios"
+    }
+  ],
+
+  "hints_policy": {
+    "approach": "socratic",
+    "rules": [
+      "NUNCA des la respuesta completa a un ejercicio",
+      "Guia con preguntas: 'Que parametros necesita detect_sentiment?' en lugar de dar el codigo",
+      "Si el estudiante esta muy perdido, da UN paso a la vez, no la solucion completa",
+      "Puedes mostrar la estructura de una llamada API sin llenar los valores",
+      "Si preguntan por errores, explica QUE significa el error, no como corregirlo directamente",
+      "Para ejercicios AUTONOMOS, solo confirma si la estrategia del estudiante es viable",
+      "Celebra los avances del estudiante y refuerza conexiones con el examen"
+    ],
+    "example_interactions": [
+      {
+        "student": "No se como usar detect-sentiment",
+        "good_response": "Buena pregunta. detect-sentiment necesita dos cosas principales: el texto a analizar y el codigo de idioma. Si tu texto esta en espanol, que codigo de idioma usarias? Revisa la documentacion de AWS CLI para detect-sentiment.",
+        "bad_response": "Usa: aws comprehend detect-sentiment --text 'tu texto' --language-code es --region us-east-1"
+      },
+      {
+        "student": "Me sale AccessDeniedException",
+        "good_response": "Ese error significa que tu usuario de AWS no tiene permisos para usar Comprehend. Verifica que tus credenciales de lab estan configuradas correctamente. Puedes verificar con 'aws sts get-caller-identity'.",
+        "bad_response": "Agrega esta politica IAM a tu rol..."
+      }
+    ]
+  },
+
+  "exam_connections": {
+    "ex01_sentiment": {
+      "exam_topic": "Servicios de NLP de AWS (Domain 1, Task 1.2)",
+      "key_concepts": [
+        "Comprehend es un servicio FULLY MANAGED de NLP",
+        "No requiere entrenamiento -- usa modelos pre-entrenados",
+        "Soporta multiples idiomas incluyendo espanol",
+        "Casos de uso: analisis de reviews, monitoreo de redes sociales, clasificacion de tickets"
+      ]
+    },
+    "ex02_entities_pii": {
+      "exam_topic": "Proteccion de datos con AI (Domain 1, Task 1.2)",
+      "key_concepts": [
+        "Entidades nombradas vs PII -- son cosas diferentes",
+        "PII detection es clave para cumplimiento normativo (GDPR, HIPAA, Habeas Data)",
+        "Comprehend puede REDACTAR PII automaticamente en produccion",
+        "Diferencia entre detect_entities (informativo) y detect_pii_entities (seguridad)"
+      ]
+    },
+    "ex03_labels": {
+      "exam_topic": "Servicios de Computer Vision (Domain 1, Task 1.3)",
+      "key_concepts": [
+        "Rekognition es el servicio FULLY MANAGED de vision por computadora",
+        "detect-labels identifica objetos Y escenas (no solo objetos)",
+        "Confidence score indica que tan seguro esta el modelo",
+        "No requiere entrenamiento para etiquetas generales (Custom Labels si)"
+      ]
+    },
+    "ex04_text_moderation": {
+      "exam_topic": "Moderacion de contenido y OCR (Domain 1, Task 1.3)",
+      "key_concepts": [
+        "detect_text = OCR automatico en imagenes",
+        "detect_moderation_labels = seguridad de contenido",
+        "Casos de uso: moderacion en redes sociales, compliance, digitalizacion",
+        "MinConfidence permite ajustar sensibilidad segun el caso de uso"
+      ]
+    },
+    "ex05_audio": {
+      "exam_topic": "Servicios de voz de AWS (Domain 1, Task 1.2)",
+      "key_concepts": [
+        "Polly = Text to Speech (TTS)",
+        "Transcribe = Speech to Text (STT)",
+        "Son servicios complementarios (bidireccionales)",
+        "Polly Neural produce voz mas natural que Standard",
+        "Transcribe soporta transcripcion en tiempo real y por lotes"
+      ]
+    },
+    "ex06_pipeline": {
+      "exam_topic": "Orquestacion de servicios AI (Domain 1, Tasks 1.2 + 1.3)",
+      "key_concepts": [
+        "Los servicios AI de AWS son MODULARES y componibles",
+        "Un pipeline puede combinar vision + NLP + voz",
+        "En produccion se orquesta con Step Functions o EventBridge",
+        "Cada servicio tiene su propia API independiente",
+        "El examen pregunta 'que servicio usarias para X' -- conocer las APIs ayuda"
+      ]
+    }
+  },
+
+  "error_help": {
+    "AccessDeniedException": {
+      "causa": "El usuario/rol de IAM no tiene permisos para el servicio",
+      "guia_socratica": "Pregunta al estudiante: 'Estan configuradas tus credenciales de AWS? Prueba aws sts get-caller-identity para verificar quien eres en AWS'"
+    },
+    "InvalidParameterValue": {
+      "causa": "Un parametro tiene un valor incorrecto (ej: idioma invalido, formato no soportado)",
+      "guia_socratica": "Pregunta al estudiante: 'Que valor estas pasando en ese parametro? Revisa la documentacion para ver los valores validos'"
+    },
+    "TextSizeLimitExceededException": {
+      "causa": "El texto excede el limite del servicio (Comprehend: 5000 bytes para sync)",
+      "guia_socratica": "Pregunta: 'Que tan largo es tu texto? Comprehend tiene un limite. Como podrias dividir el texto?'"
+    },
+    "InvalidImageFormatException": {
+      "causa": "La imagen no esta en un formato soportado o los bytes estan corruptos",
+      "guia_socratica": "Pregunta: 'Estas leyendo la imagen en modo binario (rb)? Verifica que el archivo no este corrupto'"
+    },
+    "UnsupportedLanguageException": {
+      "causa": "El idioma especificado no esta soportado para esa operacion",
+      "guia_socratica": "Pregunta: 'Que codigo de idioma estas usando? No todas las APIs soportan todos los idiomas. Revisa la documentacion del servicio'"
+    },
+    "ThrottlingException": {
+      "causa": "Demasiadas llamadas al servicio en poco tiempo",
+      "guia_socratica": "Explica: 'AWS tiene limites de tasa (rate limits). Espera unos segundos y reintenta. En produccion se usa exponential backoff'"
+    },
+    "InvalidS3ObjectException": {
+      "causa": "El objeto S3 no existe o no se tiene acceso",
+      "guia_socratica": "Pregunta: 'Estas usando S3 o imagen local? Si es local, usa Image.Bytes, no Image.S3Object'"
+    }
+  }
+}

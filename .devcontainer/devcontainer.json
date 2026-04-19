@@ -1,0 +1,52 @@
+{
+  "name": "AIF-C01 Lab 1.4 - Servicios AWS AI",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bookworm",
+
+  "features": {
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/gabanox/lab-bridge:1": {
+      "eventBusName": "bootcamp-dev-platform-events",
+      "validationScript": "validate.py",
+      "autoStart": true
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bootcamp-institute.spark-ai",
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.fontSize": 14,
+        "editor.wordWrap": "on",
+        "files.autoSave": "afterDelay",
+        "workbench.startupEditor": "readme",
+        "security.workspace.trust.enabled": false
+      }
+    }
+  },
+
+  "postCreateCommand": "pip install boto3 pandas requests jupyter ipython",
+  "postStartCommand": "/opt/bootcamp/lab-bridge/start.sh",
+  "postAttachCommand": "echo 'Lab environment ready! Open ejercicios/ to begin.'",
+
+  "containerEnv": {
+    "AWS_DEFAULT_REGION": "us-east-1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "LAB_NAME": "Servicios AWS AI"
+  },
+
+  "hostRequirements": {
+    "memory": "2gb",
+    "cpus": 1
+  },
+
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspaces/lab"
+}
